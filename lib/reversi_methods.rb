@@ -75,7 +75,7 @@ def turn!(board, target_pos, attack_stone_color, direction)
   next_pos = target_pos.next_position(direction)
   next_stone = pos_stone_color(board, next_pos.row, next_pos.col)
   return false if pos_stone_color(board, target_pos.row, target_pos.col) == BLANK_CELL
-
+  
   if (next_stone == attack_stone_color) || turn!(board, next_pos, attack_stone_color, direction)
     board[target_pos.col][target_pos.row] = attack_stone_color
     true
@@ -91,7 +91,11 @@ def pos_stone_color(board, row, col)
 end
 
 def finished?(board)
+  if placeable?(board, WHITE_STONE) == false && placeable?(board, BLACK_STONE) == false
+    true
+  else
     false
+  end
 end
 
 def placeable?(board, attack_stone_color)
